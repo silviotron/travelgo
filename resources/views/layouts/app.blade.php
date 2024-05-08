@@ -29,8 +29,39 @@
 
             <!-- Page Content -->
             <main>
+                @session('message')
+                <div id="alertMessage" class="bg-green-600 rounded absolute top-4 right-4 p-2">
+                    <div class="flex justify-between items-center">
+                        <span>{{ session('message') }}</span>
+                        <button id="closeButton" class="text-white hover:text-gray-300">
+                            ✖
+                        </button>
+                    </div>
+                </div>
+                @endsession
                 {{ $slot }}
             </main>
         </div>
     </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var alertMessage = document.getElementById('alertMessage');
+            var closeButton = document.getElementById('closeButton');
+    
+            // Función para cerrar el mensaje
+            function closeMessage() {
+                alertMessage.classList.add('hidden');
+            }
+    
+            // Cerrar mensaje al hacer clic en el botón de cerrar
+            closeButton.addEventListener('click', function () {
+                closeMessage();
+            });
+    
+            // Cerrar automáticamente después de 5 segundos
+            setTimeout(function () {
+                closeMessage();
+            }, 5000);
+        });
+    </script>
 </html>
