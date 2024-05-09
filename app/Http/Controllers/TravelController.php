@@ -16,7 +16,7 @@ class TravelController extends Controller
         $travels = Travel::query()
             ->where('user_id', request()->user()->id)
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
         return view('travel.index', ['travels' => $travels]);
     }
 
